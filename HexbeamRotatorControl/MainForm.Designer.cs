@@ -175,18 +175,18 @@
             this.numTargetBearing.Location = new System.Drawing.Point(121, 102);
             this.numTargetBearing.Margin = new System.Windows.Forms.Padding(4);
             this.numTargetBearing.Maximum = new decimal(new int[] {
+            361,
+            0,
+            0,
+            0});
+            this.numTargetBearing.Name = "numTargetBearing";
+            this.numTargetBearing.Size = new System.Drawing.Size(89, 22);
+            this.numTargetBearing.TabIndex = 2;
+            this.numTargetBearing.Value = new decimal(new int[] {
             360,
             0,
             0,
             0});
-            this.numTargetBearing.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            -2147483648});
-            this.numTargetBearing.Name = "numTargetBearing";
-            this.numTargetBearing.Size = new System.Drawing.Size(89, 22);
-            this.numTargetBearing.TabIndex = 2;
             this.numTargetBearing.ValueChanged += new System.EventHandler(this.numTargetBearing_ValueChanged);
             // 
             // tbRotation

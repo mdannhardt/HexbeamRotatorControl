@@ -255,25 +255,24 @@ namespace HexbeamRotatorControl
 
         private void numTargetBearing_ValueChanged(object sender, EventArgs e)
         {
-            if (numTargetBearing.Value == -1)
+            if (numTargetBearing.Value == 0)
             {
-                numTargetBearing.Value = 359;
+                numTargetBearing.Value = 360;
                 return;
             }
 
-            if (numTargetBearing.Value == 360)
+            if (numTargetBearing.Value == 361)
             {
-                numTargetBearing.Value = 0;
+                numTargetBearing.Value = 1;
                 return;
             }
-
-   //         sendCommand(Encoding.ASCII.GetBytes("SET_BEARING:" + numTargetBearing.Value + "\n"));
+            
             sendCommand(Encoding.ASCII.GetBytes("<PST><AZIMUTH>" + numTargetBearing.Value + "</AZIMUTH></PST>"));
         }
 
         private void btnN_Click(object sender, EventArgs e)
         {
-            numTargetBearing.Value = numTargetBearing.Value == 0 ? 1 : 0;
+            numTargetBearing.Value = numTargetBearing.Value == 360 ? 359 : 360;
         }
 
         private void btnNE_Click(object sender, EventArgs e)
