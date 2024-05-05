@@ -26,7 +26,8 @@ namespace HexbeamRotatorControl
         {
             numUdpInboundPort.Value = cfgData.udpInboundPort;
             numUdpOutboundPort.Value = cfgData.udpESP8266Port;
-            tbIpAddress.Text = cfgData.esp8266IpAddr.ToString();
+            tbIpAddress.Text = cfgData.esp8266IpAddr == null ? "" : cfgData.esp8266IpAddr.ToString();
+            tbRotatorName.Text = cfgData.rotatorName;
         }
 
         private void CfgForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -40,11 +41,17 @@ namespace HexbeamRotatorControl
             {
                 // Create an instance of IPAddress for the specified address string (in
                 // dotted-quad, or colon-hexadecimal notation).
-                esp8266Address = IPAddress.Parse(tbIpAddress.Text);
                 cfgData.udpInboundPort = (Int16)numUdpInboundPort.Value;
                 cfgData.udpESP8266Port = (Int16)numUdpOutboundPort.Value;
-                cfgData.esp8266IpAddr = esp8266Address;
-                cfgData.SaveConfigurationData();
+                cfgData.esp8266IpAddr = IPAddress.Parse(tbIpAddress.Text);
+                cfgData.rotatorName = tbRotatorName.Text;
+                if (tbRotatorName.TextLength == 0)
+                    MessageBox.Show("Rotator Name required.");
+                else
+                {
+                    cfgData.SaveConfigurationData();
+                    this.Close();
+                }
             }
 
             catch (ArgumentNullException e)
@@ -55,9 +62,7 @@ namespace HexbeamRotatorControl
 
             catch (FormatException e)
             {
-                String what = e.Message + " Address is not Saved";
-                MessageBox.Show(what);
-
+                MessageBox.Show(e.Message);
             }
 
             catch (Exception e)

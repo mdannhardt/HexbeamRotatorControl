@@ -14,6 +14,7 @@ namespace HexbeamRotatorControl
 {
     public partial class MainDisplayForm : Form
     {
+        bool IpResolved = false;
         UdpClient m_udpInboundServer;
         UdpClient m_udpESP8266;
         IPEndPoint m_ESP8266IpEndPoint;
@@ -31,8 +32,9 @@ namespace HexbeamRotatorControl
         private void initialize()
         {
             cfgData.LoadConfigurationData();
-
-            tbCurrentBearing.Text = " ??? ";
+           
+            SetTitleText(cfgData.rotatorName + "  (searching ...)");
+            tbCurrentBearing.Text = "  ";
 
             // Create a UDP port to listen for incoming commands on.
             try
@@ -45,7 +47,8 @@ namespace HexbeamRotatorControl
                 MessageBox.Show("Can't create UDP inbound end point.");
             }
 
-            // Create a UDP port for the ESP8266 rotator controller.
+            /// Create a UDP port for the ESP8266 rotator controller.
+            /// Initially this is a broadcast IP to ask for the IP of the controller.
             try
             {
                 m_ESP8266IpEndPoint = new IPEndPoint(cfgData.esp8266IpAddr, cfgData.udpESP8266Port);
@@ -82,7 +85,13 @@ namespace HexbeamRotatorControl
             String rsp = Encoding.UTF8.GetString(received);
 
             String[] rspData = rsp.Split(':');
-            if (rspData[0] == "GET_BEARING")
+            if (rspData[0] == "IDENTIFY")
+            {
+                IpResolved = true;
+                SetTitleText(cfgData.rotatorName + "  (" + rspData[1] + ")");
+                m_ESP8266IpEndPoint = new IPEndPoint(IPAddress.Parse(rspData[1]), cfgData.udpESP8266Port);
+            }
+            else if (rspData[0] == "GET_BEARING")
             {
                 m_TimeOut = 0;
                 SetBearingText(rspData[1]);
@@ -203,7 +212,7 @@ namespace HexbeamRotatorControl
             timerGetCurrentBearing.Enabled = portOpen;
             btnStop.Enabled = portOpen;
 
-            if (!portOpen)
+            if (!portOpen || IpResolved == false)
                 dataRcved = false;
 
             numTargetBearing.Enabled = dataRcved;
@@ -215,6 +224,24 @@ namespace HexbeamRotatorControl
             btnSW.Enabled = dataRcved;
             btnW.Enabled = dataRcved;
             btnNW.Enabled = dataRcved;
+            btnStop.Enabled = dataRcved;
+        }
+
+        public delegate void SetTitleTextCallback(string text);
+        private void SetTitleText(string text)
+        {
+            // InvokeRequired required compares the thread ID of the
+            // calling thread to the thread ID of the creating thread.
+            // If these threads are different, it returns true.
+            if (this.tbCurrentBearing.InvokeRequired)
+            {
+                SetTitleTextCallback d = new SetTitleTextCallback(SetTitleText);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                this.Text = text;
+            }
         }
 
         public delegate void SetBearingTextCallback(string text);
@@ -231,10 +258,8 @@ namespace HexbeamRotatorControl
             else
             {
                 this.tbCurrentBearing.Text = text;
-                setEnables(true);
             }
         }
-
 
         public delegate void SetRotationTextCallback(string text);
         private void SetRotationText(string text)
@@ -250,6 +275,7 @@ namespace HexbeamRotatorControl
             else
             {
                 this.tbRotation.Text = text;
+                setEnables(true);
             }
         }
 
@@ -315,9 +341,29 @@ namespace HexbeamRotatorControl
 
         private void timerGetCurrentBearing_Tick(object sender, EventArgs e)
         {
-            sendCommand(Encoding.ASCII.GetBytes("GET_BEARING\n"));
-            if (++m_TimeOut > 5)
-                SetBearingText("???");
+            if (IpResolved == false)
+            {
+                String cmd = "IDENTIFY:" + cfgData.rotatorName;
+                sendCommand(Encoding.ASCII.GetBytes(cmd));
+                String waiting = "";
+                switch (m_TimeOut++ % 6)
+                {
+                    case 0: waiting = "-..."; break;
+                    case 1: case 5: waiting = ".-.."; break;
+                    case 2: case 4: waiting = "..-."; break;
+                    case 3: waiting = "...-"; break;
+                }
+                SetBearingText( waiting);
+            }
+            else
+            {
+                sendCommand(Encoding.ASCII.GetBytes("GET_BEARING\n"));
+                if (++m_TimeOut > 5)
+                {
+                    setEnables(false);
+                    SetBearingText("???");
+                }
+            }
         }
 
         private void btnCfg_Click(object sender, EventArgs e)
@@ -330,8 +376,12 @@ namespace HexbeamRotatorControl
             m_udpInboundServer = null;
             m_udpESP8266 = null;
 
+            IpResolved = false;
+
             timerGetCurrentBearing.Enabled = false;
             CfgForm cfg = new CfgForm();
+            cfg.StartPosition = FormStartPosition.Manual;
+            cfg.Location = this.Location;
             cfg.ShowDialog();
             // reload configuration incase it has changed.
             initialize();

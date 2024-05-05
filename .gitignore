@@ -1,3 +1,6 @@
 *vs
 *HexbeamRotatorControl/bin
 *HexbeamRotatorControl/obj
+*.exe
+*.Shortcut.lnk
+*.pdf

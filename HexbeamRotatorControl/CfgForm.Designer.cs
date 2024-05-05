@@ -35,18 +35,20 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tbIpAddress = new System.Windows.Forms.TextBox();
+            this.tbRotatorName = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numUdpInboundPort)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUdpOutboundPort)).BeginInit();
             this.SuspendLayout();
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(78, 129);
+            this.btnSave.Location = new System.Drawing.Point(78, 152);
             this.btnSave.Margin = new System.Windows.Forms.Padding(4);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(231, 28);
-            this.btnSave.TabIndex = 4;
-            this.btnSave.Text = "Save Program Settings";
+            this.btnSave.TabIndex = 5;
+            this.btnSave.Text = "Save and Close";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
@@ -119,28 +121,49 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(38, 84);
+            this.label2.Location = new System.Drawing.Point(43, 119);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(163, 17);
+            this.label2.Size = new System.Drawing.Size(155, 17);
             this.label2.TabIndex = 21;
-            this.label2.Text = "ESP8266 IP or Netmask:";
+            this.label2.Text = "ESP8266 Broadcast IP:";
             // 
             // tbIpAddress
             // 
-            this.tbIpAddress.Location = new System.Drawing.Point(207, 79);
+            this.tbIpAddress.Location = new System.Drawing.Point(207, 114);
             this.tbIpAddress.MaxLength = 15;
             this.tbIpAddress.Name = "tbIpAddress";
             this.tbIpAddress.Size = new System.Drawing.Size(137, 22);
-            this.tbIpAddress.TabIndex = 3;
+            this.tbIpAddress.TabIndex = 4;
             this.tbIpAddress.TextChanged += new System.EventHandler(this.tbIpAddress_TextChanged);
             this.tbIpAddress.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbIpAddress_KeyPress);
+            // 
+            // tbRotatorName
+            // 
+            this.tbRotatorName.Location = new System.Drawing.Point(205, 82);
+            this.tbRotatorName.MaxLength = 15;
+            this.tbRotatorName.Name = "tbRotatorName";
+            this.tbRotatorName.Size = new System.Drawing.Size(139, 22);
+            this.tbRotatorName.TabIndex = 3;
+            this.tbRotatorName.Text = "ESP-FFFFFF";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(98, 85);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(100, 17);
+            this.label4.TabIndex = 23;
+            this.label4.Text = "Rotator Name:";
             // 
             // CfgForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(379, 188);
+            this.ClientSize = new System.Drawing.Size(379, 193);
+            this.Controls.Add(this.tbRotatorName);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.tbIpAddress);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.numUdpOutboundPort);
@@ -170,5 +193,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tbIpAddress;
+        private System.Windows.Forms.TextBox tbRotatorName;
+        private System.Windows.Forms.Label label4;
     }
 }
