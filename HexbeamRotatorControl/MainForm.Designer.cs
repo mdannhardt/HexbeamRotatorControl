@@ -62,6 +62,7 @@
             // 
             // btnStop
             // 
+            this.btnStop.BackColor = System.Drawing.Color.Red;
             this.btnStop.Enabled = false;
             this.btnStop.Location = new System.Drawing.Point(15, 60);
             this.btnStop.Margin = new System.Windows.Forms.Padding(4);
@@ -69,7 +70,7 @@
             this.btnStop.Size = new System.Drawing.Size(305, 102);
             this.btnStop.TabIndex = 1;
             this.btnStop.Text = "STOP";
-            this.btnStop.UseVisualStyleBackColor = true;
+            this.btnStop.UseVisualStyleBackColor = false;
             this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
             // timerGetCurrentBearing
@@ -79,6 +80,7 @@
             // 
             // btnN
             // 
+            this.btnN.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.btnN.Enabled = false;
             this.btnN.Location = new System.Drawing.Point(121, 66);
             this.btnN.Margin = new System.Windows.Forms.Padding(4);
@@ -86,11 +88,12 @@
             this.btnN.Size = new System.Drawing.Size(89, 28);
             this.btnN.TabIndex = 3;
             this.btnN.Text = "N";
-            this.btnN.UseVisualStyleBackColor = true;
+            this.btnN.UseVisualStyleBackColor = false;
             this.btnN.Click += new System.EventHandler(this.btnN_Click);
             // 
             // btnW
             // 
+            this.btnW.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.btnW.Enabled = false;
             this.btnW.Location = new System.Drawing.Point(24, 98);
             this.btnW.Margin = new System.Windows.Forms.Padding(4);
@@ -98,11 +101,12 @@
             this.btnW.Size = new System.Drawing.Size(89, 28);
             this.btnW.TabIndex = 4;
             this.btnW.Text = "W";
-            this.btnW.UseVisualStyleBackColor = true;
+            this.btnW.UseVisualStyleBackColor = false;
             this.btnW.Click += new System.EventHandler(this.btnW_Click);
             // 
             // btnS
             // 
+            this.btnS.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.btnS.Enabled = false;
             this.btnS.Location = new System.Drawing.Point(121, 130);
             this.btnS.Margin = new System.Windows.Forms.Padding(4);
@@ -110,11 +114,12 @@
             this.btnS.Size = new System.Drawing.Size(89, 28);
             this.btnS.TabIndex = 5;
             this.btnS.Text = "S";
-            this.btnS.UseVisualStyleBackColor = true;
+            this.btnS.UseVisualStyleBackColor = false;
             this.btnS.Click += new System.EventHandler(this.btnS_Click);
             // 
             // btnE
             // 
+            this.btnE.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.btnE.Enabled = false;
             this.btnE.Location = new System.Drawing.Point(217, 98);
             this.btnE.Margin = new System.Windows.Forms.Padding(4);
@@ -122,51 +127,55 @@
             this.btnE.Size = new System.Drawing.Size(89, 28);
             this.btnE.TabIndex = 6;
             this.btnE.Text = "E";
-            this.btnE.UseVisualStyleBackColor = true;
+            this.btnE.UseVisualStyleBackColor = false;
             this.btnE.Click += new System.EventHandler(this.btnE_Click);
             // 
             // btnNW
             // 
+            this.btnNW.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.btnNW.Enabled = false;
             this.btnNW.Location = new System.Drawing.Point(85, 78);
             this.btnNW.Margin = new System.Windows.Forms.Padding(4);
             this.btnNW.Name = "btnNW";
             this.btnNW.Size = new System.Drawing.Size(28, 16);
             this.btnNW.TabIndex = 7;
-            this.btnNW.UseVisualStyleBackColor = true;
+            this.btnNW.UseVisualStyleBackColor = false;
             this.btnNW.Click += new System.EventHandler(this.btnNW_Click);
             // 
             // btnNE
             // 
+            this.btnNE.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.btnNE.Enabled = false;
             this.btnNE.Location = new System.Drawing.Point(217, 78);
             this.btnNE.Margin = new System.Windows.Forms.Padding(4);
             this.btnNE.Name = "btnNE";
             this.btnNE.Size = new System.Drawing.Size(28, 16);
             this.btnNE.TabIndex = 8;
-            this.btnNE.UseVisualStyleBackColor = true;
+            this.btnNE.UseVisualStyleBackColor = false;
             this.btnNE.Click += new System.EventHandler(this.btnNE_Click);
             // 
             // btnSE
             // 
+            this.btnSE.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.btnSE.Enabled = false;
             this.btnSE.Location = new System.Drawing.Point(217, 130);
             this.btnSE.Margin = new System.Windows.Forms.Padding(4);
             this.btnSE.Name = "btnSE";
             this.btnSE.Size = new System.Drawing.Size(28, 16);
             this.btnSE.TabIndex = 9;
-            this.btnSE.UseVisualStyleBackColor = true;
+            this.btnSE.UseVisualStyleBackColor = false;
             this.btnSE.Click += new System.EventHandler(this.btnSE_Click);
             // 
             // btnSW
             // 
+            this.btnSW.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.btnSW.Enabled = false;
             this.btnSW.Location = new System.Drawing.Point(85, 130);
             this.btnSW.Margin = new System.Windows.Forms.Padding(4);
             this.btnSW.Name = "btnSW";
             this.btnSW.Size = new System.Drawing.Size(28, 16);
             this.btnSW.TabIndex = 10;
-            this.btnSW.UseVisualStyleBackColor = true;
+            this.btnSW.UseVisualStyleBackColor = false;
             this.btnSW.Click += new System.EventHandler(this.btnSW_Click);
             // 
             // numTargetBearing
